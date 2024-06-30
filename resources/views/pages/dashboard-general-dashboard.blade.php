@@ -9,74 +9,23 @@
     <link rel="stylesheet"
         href="{{ asset('library/summernote/dist/summernote-bs4.min.css') }}">
 @endpush
+<style>
+    .story-card {
+        border-radius: 10px;
+        transition: transform 0.3s, box-shadow 0.3s;
+        cursor: pointer;
+    }
 
+    .story-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+</style>
 @section('main')
     <div class="main-content">
         <section class="section">
-            <div class="section-header">
-                <h1>Dashboard</h1>
-            </div>
-            {{-- <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <div class="card card-statistic-1">
-                        <div class="card-icon bg-primary">
-                            <i class="far fa-user"></i>
-                        </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>Total Admin</h4>
-                            </div>
-                            <div class="card-body">
-                                10
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <div class="card card-statistic-1">
-                        <div class="card-icon bg-danger">
-                            <i class="far fa-newspaper"></i>
-                        </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>News</h4>
-                            </div>
-                            <div class="card-body">
-                                42
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <div class="card card-statistic-1">
-                        <div class="card-icon bg-warning">
-                            <i class="far fa-file"></i>
-                        </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>Reports</h4>
-                            </div>
-                            <div class="card-body">
-                                1,201
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <div class="card card-statistic-1">
-                        <div class="card-icon bg-success">
-                            <i class="fas fa-circle"></i>
-                        </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>Online Users</h4>
-                            </div>
-                            <div class="card-body">
-                                47
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            {{-- <div class="section-header">
+                <h1>{{ $pageTitle}}</h1>
             </div> --}}
             <div class="row mb-4">
                 <div class="col-lg-5 col-md-12">
@@ -98,88 +47,111 @@
                     </select>
                 </div>
                 <div class="col-lg-2 col-md-12">
-                    <a href="#" class="btn btn-primary btn-block btn-lg" style="border-color: transparent; background: linear-gradient(to right, #000000, #007bff);">
-                        Create Article
-                        <i class="fa-solid fa-pencil ml-3"></i>
+                    <a href="{{ route('story.create') }}" class="btn btn-primary btn-block btn-lg" style="border-color: transparent; background: linear-gradient(to right, #2e2e2e, #1d75d3);">
+                        <div>
+                            Create Article
+                            <i class="fa-solid fa-pencil" style="margin: 0 5px 0 5px;"></i>
+                        </div>
                     </a>
                 </div>
                 <div class="col-lg-3 col-md-12 col-12 col-sm-12"></div>
             </div>
             
             <div class="row">
-                <div class="col-lg-9 col-md-12 col-12 col-sm-12">
+                <div class="col-lg-9 col-md-12 col-12 col-sm-12 story-list">
                     <div class="row">
                         @foreach ($story as $item)
                             <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="card mb-4" style="border-radius: 10px;">
-                                    <img src="{{ asset('images/'. $item->image) }}" style="width: auto; border-radius:10px;" class="card-img-top m-3" alt="Nama Gambar">
+                                <div class="card mb-4 story-card" style="border-radius: 10px;" data-id="{{ $item->id }}">
+                                    <img src="{{ asset('images/'. $item->image) }}" style="width: auto; height: 10rem; border-radius:10px;" class="card-img-top m-3" alt="Nama Gambar">
                                     <div class="card-body">
                                         <div style="display: flex; justify-content: space-between; align-items: center;">
                                             <h5 class="card-title">{{ $item->title}}</h5>
                                             <span class="card-date">30 June 2024</span>
                                         </div>
-                                        <p class="card-text" style="line-height: 1.5">{{ $item->content }}</p>
-                                        <a href="#" class="btn btn-primary" style="background-color: #cfcfcf; color: black; border-color: transparent">Technologies</a>
-                                        <a href="#" class="btn btn-primary" style="background-color: #cfcfcf; color: black; border-color: transparent">Work</a>
+                                        <p class="card-text" style="line-height: 1.5">{{ Str::limit($item->content, 100, '...') }}</p>
+                                        <a href="#" class="btn btn-primary" style="box-shadow: none; background-color: #e7e7e7; color: black; border-color: transparent">Technologies</a>
+                                        <a href="#" class="btn btn-primary" style="box-shadow: none; background-color: #e7e7e7; color: black; border-color: transparent">Work</a>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-12 col-12 col-sm-12">
-                    <div class="card" style="position: sticky; top: 20px;">
-                        <div class="card-header py-0" style="min-height: 50px;">
-                            <h4>Your Article</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="row d-flex mb-3">
-                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <div class="row">
-                                        <div class="col-lg-4 col-md-4 col-4 col-sm-4 p-0">
-                                            <img src="{{ asset('images/1719661055_Screenshot (1).png') }}" class="card-img-top" style="border-radius: 10px" alt="Nama Gambar">
-                                        </div>
-                                        <div class="col-lg-8 col-md-8 col-8 col-sm-8">
-                                            <div class="media-body">
-                                                <div class="media-title">Farhan A Mujib</div>
-                                                <span class="text-small text-muted">Cras sit amet nibh libero</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row d-flex mb-3">
-                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <div class="row">
-                                        <div class="col-lg-4 col-md-4 col-4 col-sm-4 p-0">
-                                            <img src="{{ asset('images/1719661055_Screenshot (1).png') }}" class="card-img-top" style="border-radius: 10px" alt="Nama Gambar">
-                                        </div>
-                                        <div class="col-lg-8 col-md-8 col-8 col-sm-8">
-                                            <div class="media-body">
-                                                <div class="media-title">Farhan A Mujib</div>
-                                                <span class="text-small text-muted">Cras sit amet nibh libero</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row d-flex mb-3">
-                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <div class="row">
-                                        <div class="col-lg-4 col-md-4 col-4 col-sm-4 p-0">
-                                            <img src="{{ asset('images/1719661055_Screenshot (1).png') }}" class="card-img-top" style="border-radius: 10px" alt="Nama Gambar">
-                                        </div>
-                                        <div class="col-lg-8 col-md-8 col-8 col-sm-8">
-                                            <div class="media-body">
-                                                <div class="media-title">Farhan A Mujib</div>
-                                                <span class="text-small text-muted">Cras sit amet nibh libero</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                <div id="story-detail" class="col-lg-9 col-md-12 col-12 col-sm-12 mt-4" style="display: none;">
+                    <a href="/dashboard-general-dashboard" class="btn btn-primary mb-3" style="color: white; text-decoration: none;">
+                        <i class="fa-solid fa-arrow-left-long"></i> Back
+                    </a>                    
+                    <div class="card p-5" style="border-radius: 10px;">
+                        <img id="story-detail-image" style="width: 100%; border-radius:10px;" class="card-img-top" alt="Gambar">
+                        <div class="card-body p-0 mt-3">
+                            <h5 id="story-detail-title" class="card-title"></h5>
+                            <p id="story-detail-content" class="card-text"></p>
+                            <a href="#" class="btn btn-primary" style="box-shadow: none; background-color: #e7e7e7; color: black; border-color: transparent">Technologies</a>
+                            <a href="#" class="btn btn-primary" style="box-shadow: none; background-color: #e7e7e7; color: black; border-color: transparent">Work</a>
                         </div>
                     </div>
+                </div>
+                
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        document.querySelectorAll('.story-card').forEach(function(card) {
+                            card.addEventListener('click', function() {
+                                var storyId = this.getAttribute('data-id');
+                                fetch(`/detail/${storyId}`)
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        document.getElementById('story-detail-image').src = `/images/${data.image}`;
+                                        document.getElementById('story-detail-title').innerText = data.title;
+                                        document.getElementById('story-detail-content').innerText = data.content;
+                                        document.querySelector('.story-list').style.display = 'none';
+                                        document.getElementById('story-detail').style.display = 'block';
+                                    })
+                                .catch(error => console.error('Error:', error));
+                            });
+                        });
+                    });
+                </script>
+            
+
+                <div class="col-lg-3 col-md-12 col-12 col-sm-12">
+                    <div class="card" style="position: -webkit-sticky; position: sticky; top: 20px; border-radius: 10px; overflow: hidden;">
+                        <div class="card-header py-0" style="min-height: 50px;">
+                            <h4 class="font-weight-bold" style="color: black">Your Article</h4>
+                        </div>
+                        <div class="card-body p-1"  style="max-height: 400px; overflow-y: auto;">
+                            @foreach ($story as $item)
+                                <div class="col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <div class="d-flex align-items-center">
+                                        <div class="col-lg-5 col-md-4 col-4 col-sm-4 p-0">
+                                            <img src="{{ asset('images/'.$item->image) }}" class="img-fluid" style="border-radius: 10px;" alt="Nama Gambar">
+                                        </div>
+                                        <div class="col-lg-7 col-md-8 col-8 col-sm-8">
+                                            <div class="media-body">
+                                                <div class="media-title font-weight-bold" style="color: black">{{ $item->title}}</div>
+                                                <span class="text-small" style="color: black">{{ Str::limit($item->content, 25, '...') }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="card-footer py-2">
+                            <div class="mb-2">
+                                <span class="font-weight-bold" style="color: black;">All Category</span>
+                            </div>
+                            <div class="mb-2">
+                                <a href="#" class="btn" style="box-shadow: none; background-color: #e7e7e7; color: black; border-color: transparent">Technologies</a>
+                                <a href="#" class="btn" style="box-shadow: none; background-color: #e7e7e7; color: black; border-color: transparent">Design</a>
+                                <a href="#" class="btn" style="box-shadow: none; background-color: #e7e7e7; color: black; border-color: transparent">IT</a>
+                            </div>
+                            <div>
+                                <a href="#" class="btn" style="box-shadow: none; background-color: #e7e7e7; color: black; border-color: transparent">work</a>
+                                <a href="#" class="btn" style="box-shadow: none; background-color: #e7e7e7; color: black; border-color: transparent">Web</a>
+                                <a href="#" class="btn" style="box-shadow: none; background-color: #e7e7e7; color: black; border-color: transparent">Programmer</a>
+                            </div>
+                        </div>
+                    </div>                                      
                 </div>    
             </div>
             {{-- <div class="row">

@@ -21,11 +21,11 @@
     @endif
     <div class="main-content">
         <section class="section">
-            <div class="section-header">
+            {{-- <div class="section-header">
                 <h1>{{ $pageTitle }}</h1>
                 <div class="section-header-button">
                     @can('user-create')
-                        <a href="{{ route('users.create') }}" class="btn btn-primary">Add New</a>
+                        <a href="{{ route('users.create') }}" class="btn btn-primary"><i class="fa-solid fa-plus mr-2"></i>Add New</a>
                     @endcan
                 </div>
                 <div class="section-header-breadcrumb">
@@ -33,12 +33,12 @@
                     <div class="breadcrumb-item"><a href="#">{{ $pageTitle }}</a></div>
                     <div class="breadcrumb-item">All {{ $pageTitle }}</div>
                 </div>
-            </div>
+            </div> --}}
             <div class="section-body">
-                <h2 class="section-title">{{ $pageTitle }}</h2>
+                {{-- <h2 class="section-title">{{ $pageTitle }}</h2>
                 <p class="section-lead">
                     You can manage all posts, such as editing, deleting and more.
-                </p>
+                </p> --}}
                 @if(session()->has('success'))
                     <div class="alert alert-success alert-dismissible show fade">
                         <div class="alert-body">
@@ -64,11 +64,14 @@
                 <div class="row mt-4">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header" style="justify-content: space-between">
                                 <h4>All {{ $pageTitle }}</h4>
+                                @can('user-create')
+                                    <a href="{{ route('users.create') }}" class="btn btn-primary" style="border-radius: 5px">Add New</a>
+                                @endcan
                             </div>
                             <div class="card-body">
-                                <div class="float-left">
+                                {{-- <div class="float-left">
                                     @can('user-pdf')
                                         <div class="input-group">
                                             <a href="{{ url('/exportPdfUsers') }}" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm">
@@ -85,11 +88,11 @@
                                             </a>
                                         </div>
                                     @endcan
-                                </div>
+                                </div> --}}
                                 <div class="clearfix mb-3"></div>
                                 <div class="table-responsive">
                                     <div id="table-wrapper">
-                                        <div id="table-scroll">                        
+                                        {{-- <div id="table-scroll">                         --}}
                                             {{-- <table class="table-striped table" id="table-users">
                                                 <thead>
                                                     <tr>

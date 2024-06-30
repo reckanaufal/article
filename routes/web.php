@@ -54,6 +54,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('permissions', 'PermissionController');
     Route::resource('category', 'CategoryController');
     Route::resource('story', 'StoryController');
+    Route::get('/detail/{id}', 'StoryController@getStory')->name('story.get');
+
     //user
     Route::resource('users', 'UserController');
     Route::get('/profile', 'UserController@profile')->name('profile');

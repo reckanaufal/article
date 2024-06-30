@@ -20,7 +20,7 @@
             <div class="section-header">
                 @includeif('partials.errors')
                 <div class="section-header-back">
-                    <a href="features-posts.html"
+                    <a href="/roles"
                         class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
                 </div>
                 <h1>Create New {{ $pageTitle ?? '' }}</h1>

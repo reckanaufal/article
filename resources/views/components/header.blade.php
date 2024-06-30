@@ -1,4 +1,4 @@
-<div class="navbar-bg"></div>
+<div class="navbar-bg" style="height: 4rem;"></div>
 <nav class="navbar navbar-expand-lg main-navbar">
     <form class="form-inline mr-auto">
         <ul class="navbar-nav mr-3">
@@ -12,6 +12,7 @@
                     <i class="fas fa-search"></i>
                 </a>
             </li>
+            <li style="color: white">{{ $pageTitle }}</li>
         </ul>
         {{-- <div class="search-element">
             <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="250">

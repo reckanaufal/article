@@ -1,7 +1,7 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="{{ route('login') }}">Kishack</a>
+            <img src="{{ asset('images/kis2.png') }}" alt="logo" style="width: 6rem;">
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="{{ route('login') }}">KH</a>
@@ -11,41 +11,41 @@
             <li class="nav-item {{ Request::is('dashboard') ? 'active' : '' }}">
                 <a href="{{ url('dashboard-general-dashboard') }}" class="nav-link"><i class="fas fa-fire"></i><span>Explore Now</span></a>
             </li>
-            <li class="nav-item dropdown {{ Request::is('users') ? 'active' : '' }}">
+            <li class="nav-item dropdown {{ Request::is('users*') || Request::is('permissions*') || Request::is('roles*') ? 'active' : '' }}">
                 <a href="#"
                     class="nav-link has-dropdown"><i class="fa-solid fa-people-group"></i><span>User Management</span></a>
                 <ul class="dropdown-menu">
-                    <li class="menu-header">User</li>
+                    {{-- <li class="menu-header">User</li> --}}
                     @can('user-list')
                     <li class="{{ Request::is('users') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('users') }}"><i class="far fa-square"></i> <span>Users</span></a>
+                        <a class="nav-link" href="{{ url('users') }}"><span>Users</span></a>
                     </li>
                     @endcan
                     @can('permission-list')
                         <li class="{{ Request::is('permissions') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ url('permissions') }}"><i class="far fa-square"></i> <span>Permission</span></a>
+                            <a class="nav-link" href="{{ url('permissions') }}"><span>Permission</span></a>
                         </li>
                     @endcan
                     @can('role-list')
                         <li class="{{ Request::is('roles') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ url('roles') }}"><i class="far fa-square"></i> <span>Roles</span></a>
+                            <a class="nav-link" href="{{ url('roles') }}"><span>Roles</span></a>
                         </li>
                     @endcan
                 </ul>
             </li>
-            <li class="nav-item dropdown {{ Request::is('category') ? 'active' : '' }}">
+            <li class="nav-item dropdown {{ Request::is('story*') || Request::is('category*') ? 'active' : '' }}">
                 <a href="#"
                     class="nav-link has-dropdown"><i class="fa-solid fa-book-open"></i><span>Master Data</span></a>
                 <ul class="dropdown-menu">
-                    <li class="menu-header">Master</li>
+                    {{-- <li class="menu-header">Master</li> --}}
                     @can('category-list')
                     <li class="{{ Request::is('category') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('category') }}"><i class="far fa-square"></i> <span>Master Category</span></a>
+                        <a class="nav-link" href="{{ url('category') }}"><span>Master Category</span></a>
                     </li>
                     @endcan
                     @can('article-list')
                         <li class="{{ Request::is('story') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ url('story') }}"><i class="far fa-square"></i> <span>Master Article</span></a>
+                            <a class="nav-link" href="{{ url('story') }}"><span>Master Article</span></a>
                         </li>
                     @endcan
                 </ul>

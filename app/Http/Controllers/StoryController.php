@@ -183,4 +183,10 @@ class StoryController extends Controller
                 ->with('failed', 'Story deleted failed because id is empty or null');
         }
     }
+
+    public function getStory($id)
+{
+    $story = Story::findOrFail($id);
+    return response()->json($story);
+}
 }

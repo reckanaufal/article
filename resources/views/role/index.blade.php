@@ -12,7 +12,7 @@
 @section('main')
 <div class="main-content">
     <section class="section">
-        <div class="section-header">
+        {{-- <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-button">
                 @can('role-create')
@@ -24,12 +24,12 @@
                 <div class="breadcrumb-item"><a href="#">{{ $pageTitle }}</a></div>
                 <div class="breadcrumb-item">All {{ $pageTitle }}</div>
             </div>
-        </div>
+        </div> --}}
         <div class="section-body">
-            <h2 class="section-title">{{ $pageTitle }}</h2>
+            {{-- <h2 class="section-title">{{ $pageTitle }}</h2>
             <p class="section-lead">
                 You can manage all {{ $pageTitle }}s, such as editing, deleting and more.
-            </p>
+            </p> --}}
             @if(session()->has('success'))
                 <div class="alert alert-success alert-dismissible show fade">
                     <div class="alert-body">
@@ -55,8 +55,11 @@
             <div class="row mt-4">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header" style="justify-content: space-between">
                             <h4>All {{ $pageTitle }}</h4>
+                            @can('role-create')
+                                <a href="{{ route('roles.create') }}" class="btn btn-primary" style="border-radius: 5px">Add New</a>
+                            @endcan
                         </div>
                         <div class="card-body">
                             <div class="float-left">
@@ -102,13 +105,13 @@
                                                                 {{ $loop->iteration }}.
                                                             </td>
                                                             <td>{{ $item->name }}
-                                                                <div class="table-links">
+                                                                {{-- <div class="table-links">
                                                                     <a href="{{ route('roles.show', $item->id) }}">View</a>
                                                                     <div class="bullet"></div>
                                                                     <a href="{{ route('roles.edit', $item->id) }}">Edit</a>
                                                                     <div class="bullet"></div>
                                                                     <a href="{{ route('roles.destroy', $item->id) }}" class="text-danger">Trash</a>
-                                                                </div>
+                                                                </div> --}}
                                                             </td>
                                                             <td>{{ $item->created_at }}</td>
                                                             <td>

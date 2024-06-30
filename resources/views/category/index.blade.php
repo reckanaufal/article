@@ -12,7 +12,7 @@
 @section('main')
 <div class="main-content">
     <section class="section">
-        <div class="section-header">
+        {{-- <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-button">
                 @can('category-create')
@@ -24,12 +24,12 @@
                 <div class="breadcrumb-item"><a href="#">{{ $pageTitle }}</a></div>
                 <div class="breadcrumb-item">All {{ $pageTitle }}</div>
             </div>
-        </div>
+        </div> --}}
         <div class="section-body">
-            <h2 class="section-title">{{ $pageTitle }}</h2>
+            {{-- <h2 class="section-title">{{ $pageTitle }}</h2>
             <p class="section-lead">
                 You can manage all {{ $pageTitle }}s, such as editing, deleting and more.
-            </p>
+            </p> --}}
             @if(session()->has('success'))
                 <div class="alert alert-success alert-dismissible show fade">
                     <div class="alert-body">
@@ -55,37 +55,23 @@
             <div class="row mt-4">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header" style="justify-content: space-between">
                             <h4>All {{ $pageTitle }}</h4>
+                            @can('category-create')
+                                <a href="{{ route('category.create') }}" class="btn btn-primary" style="border-radius: 5px">Add New</a>
+                            @endcan
                         </div>
                         <div class="card-body">
                             <div class="float-left">
-                                {{-- <select class="form-control selectric">
-                                    <option>Action For Selected</option>
-                                    <option>Move to Draft</option>
-                                    <option>Move to Pending</option>
-                                    <option>Delete Pemanently</option>
-                                </select> --}}
                             </div>
                             <div class="float-right">
-                                {{-- <form>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary">
-                                                <i class="fas fa-search"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form> --}}
                             </div>
-
                             <div class="clearfix mb-3"></div>
                             <div class="table-responsive">
                                 <div id="table-wrapper">
                                     <div id="table-scroll"> 
                                             @can('category-list')
-                                                <table class="table-striped table" id="table-category">
+                                                <table class="table-striped table" id="table-roles">
                                                     <thead>
                                                         <tr>
                                                             <th>No</th>
@@ -101,13 +87,13 @@
                                                                     {{ $loop->iteration }}.
                                                                 </td>
                                                                 <td>{{ $item->name }}
-                                                                    <div class="table-links">
+                                                                    {{-- <div class="table-links">
                                                                         <a href="{{ route('category.show', $item->id) }}">View</a>
                                                                         <div class="bullet"></div>
                                                                         <a href="{{ route('category.edit', $item->id) }}">Edit</a>
                                                                         <div class="bullet"></div>
                                                                         <a href="{{ route('category.destroy', $item->id) }}" class="text-danger">Trash</a>
-                                                                    </div>
+                                                                    </div> --}}
                                                                 </td>
                                                                 <td>{{ $item->created_at }}</td>
                                                                 <td>

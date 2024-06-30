@@ -57,10 +57,24 @@
                                         <div class="col-sm-12 col-md-7 offset-md-3">
                                             <div class="upload-box" style="border: 2px dashed #ccc; padding: 20px; text-align: center; cursor: pointer;">
                                                 <span>Upload banner image 1400px x 1400px</span>
-                                                <input type="file" name="banner_image" style="opacity: 0; position: absolute; left: 0; top: 0; width: 100%; height: 100%; cursor: pointer;">
+                                                <input type="file" name="banner_image" id="banner_image" accept="image/*" style="opacity: 0; position: absolute; left: 0; top: 0; width: 100%; height: 100%; cursor: pointer;">
                                             </div>
+                                            <img id="preview-image" src="#" alt="Image Preview" style="display: none; margin-top: 20px; max-width: 100%; height: auto;">
                                         </div>
                                     </div>
+                                    
+                                    <script>
+                                        document.getElementById('banner_image').addEventListener('change', function(event) {
+                                            var reader = new FileReader();
+                                            reader.onload = function() {
+                                                var output = document.getElementById('preview-image');
+                                                output.src = reader.result;
+                                                output.style.display = 'block';
+                                            };
+                                            reader.readAsDataURL(event.target.files[0]);
+                                        });
+                                    </script>
+                                                                     
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Category</label>
                                         <div class="col-sm-12 col-md-7">
