@@ -159,10 +159,12 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         // dd($request);
-        $request->validate(User::$rules);
+        // $request->validate(User::$rules);
     
         $data = $request->all();
+        // dd($data);
     
+
         if (!empty($data['password'])) {
             $data['password'] = Hash::make($data['password']);
         } else {

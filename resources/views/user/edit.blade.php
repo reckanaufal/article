@@ -76,11 +76,9 @@
                                         <div class="form-group row mb-4">
                                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Roles</label>
                                             <div class="col-sm-12 col-md-7">
-                                                <select class="form-control select2" name="roles" multiple>
-                                                    @foreach($role as $ole)
-                                                        <option value="{{ $ole->name }}">
-                                                            {{ $ole->name }}
-                                                        </option>
+                                                <select class="form-control select2" name="roles">
+                                                    @foreach ($role as $item)
+                                                        <option value="{{ $item->name }}">{{ $item->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>

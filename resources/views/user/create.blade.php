@@ -82,7 +82,7 @@
                                         <div class="col-sm-12 col-md-7">
                                             <select class="form-control select2" name="roles">
                                                 @foreach ($role as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
