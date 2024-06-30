@@ -16,7 +16,7 @@
             <div class="section-header">
                 <h1>Dashboard</h1>
             </div>
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card card-statistic-1">
                         <div class="card-icon bg-primary">
@@ -77,120 +77,112 @@
                         </div>
                     </div>
                 </div>
+            </div> --}}
+            <div class="row mb-4">
+                <div class="col-lg-5 col-md-12">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search...">
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i class="fas fa-search"></i>
+                            </span>
+                        </div>
+                    </div>                    
+                </div>
+                <div class="col-lg-2 col-md-12">
+                    <select class="form-control form-control-sm">
+                        <option value="">Category</option>
+                        <!-- Add your categories here -->
+                        <option value="category1">Category 1</option>
+                        <option value="category2">Category 2</option>
+                    </select>
+                </div>
+                <div class="col-lg-2 col-md-12">
+                    <a href="#" class="btn btn-primary btn-block btn-lg" style="border-color: transparent; background: linear-gradient(to right, #000000, #007bff);">
+                        Create Article
+                        <i class="fa-solid fa-pencil ml-3"></i>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-12 col-12 col-sm-12"></div>
             </div>
+            
             <div class="row">
-                <div class="col-lg-8 col-md-12 col-12 col-sm-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Statistics</h4>
-                            <div class="card-header-action">
-                                <div class="btn-group">
-                                    <a href="#"
-                                        class="btn btn-primary">Week</a>
-                                    <a href="#"
-                                        class="btn">Month</a>
+                <div class="col-lg-9 col-md-12 col-12 col-sm-12">
+                    <div class="row">
+                        @foreach ($story as $item)
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="card mb-4" style="border-radius: 10px;">
+                                    <img src="{{ asset('images/'. $item->image) }}" style="width: auto; border-radius:10px;" class="card-img-top m-3" alt="Nama Gambar">
+                                    <div class="card-body">
+                                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                                            <h5 class="card-title">{{ $item->title}}</h5>
+                                            <span class="card-date">30 June 2024</span>
+                                        </div>
+                                        <p class="card-text" style="line-height: 1.5">{{ $item->content }}</p>
+                                        <a href="#" class="btn btn-primary" style="background-color: #cfcfcf; color: black; border-color: transparent">Technologies</a>
+                                        <a href="#" class="btn btn-primary" style="background-color: #cfcfcf; color: black; border-color: transparent">Work</a>
+                                    </div>
                                 </div>
                             </div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-12 col-12 col-sm-12">
+                    <div class="card" style="position: sticky; top: 20px;">
+                        <div class="card-header py-0" style="min-height: 50px;">
+                            <h4>Your Article</h4>
                         </div>
                         <div class="card-body">
-                            <canvas id="myChart"
-                                height="182"></canvas>
-                            <div class="statistic-details mt-sm-4">
-                                <div class="statistic-details-item">
-                                    <span class="text-muted"><span class="text-primary"><i
-                                                class="fas fa-caret-up"></i></span> 7%</span>
-                                    <div class="detail-value">$243</div>
-                                    <div class="detail-name">Today's Sales</div>
+                            <div class="row d-flex mb-3">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-4 col-sm-4 p-0">
+                                            <img src="{{ asset('images/1719661055_Screenshot (1).png') }}" class="card-img-top" style="border-radius: 10px" alt="Nama Gambar">
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-8 col-sm-8">
+                                            <div class="media-body">
+                                                <div class="media-title">Farhan A Mujib</div>
+                                                <span class="text-small text-muted">Cras sit amet nibh libero</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="statistic-details-item">
-                                    <span class="text-muted"><span class="text-danger"><i
-                                                class="fas fa-caret-down"></i></span> 23%</span>
-                                    <div class="detail-value">$2,902</div>
-                                    <div class="detail-name">This Week's Sales</div>
+                            </div>
+                            <div class="row d-flex mb-3">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-4 col-sm-4 p-0">
+                                            <img src="{{ asset('images/1719661055_Screenshot (1).png') }}" class="card-img-top" style="border-radius: 10px" alt="Nama Gambar">
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-8 col-sm-8">
+                                            <div class="media-body">
+                                                <div class="media-title">Farhan A Mujib</div>
+                                                <span class="text-small text-muted">Cras sit amet nibh libero</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="statistic-details-item">
-                                    <span class="text-muted"><span class="text-primary"><i
-                                                class="fas fa-caret-up"></i></span>9%</span>
-                                    <div class="detail-value">$12,821</div>
-                                    <div class="detail-name">This Month's Sales</div>
-                                </div>
-                                <div class="statistic-details-item">
-                                    <span class="text-muted"><span class="text-primary"><i
-                                                class="fas fa-caret-up"></i></span> 19%</span>
-                                    <div class="detail-value">$92,142</div>
-                                    <div class="detail-name">This Year's Sales</div>
+                            </div>
+                            <div class="row d-flex mb-3">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-4 col-sm-4 p-0">
+                                            <img src="{{ asset('images/1719661055_Screenshot (1).png') }}" class="card-img-top" style="border-radius: 10px" alt="Nama Gambar">
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-8 col-sm-8">
+                                            <div class="media-body">
+                                                <div class="media-title">Farhan A Mujib</div>
+                                                <span class="text-small text-muted">Cras sit amet nibh libero</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-12 col-12 col-sm-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Recent Activities</h4>
-                        </div>
-                        <div class="card-body">
-                            <ul class="list-unstyled list-unstyled-border">
-                                <li class="media">
-                                    <img class="rounded-circle mr-3"
-                                        width="50"
-                                        src="{{ asset('img/avatar/avatar-1.png') }}"
-                                        alt="avatar">
-                                    <div class="media-body">
-                                        <div class="text-primary float-right">Now</div>
-                                        <div class="media-title">Farhan A Mujib</div>
-                                        <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla.
-                                            Nulla vel metus scelerisque ante sollicitudin.</span>
-                                    </div>
-                                </li>
-                                <li class="media">
-                                    <img class="rounded-circle mr-3"
-                                        width="50"
-                                        src="{{ asset('img/avatar/avatar-2.png') }}"
-                                        alt="avatar">
-                                    <div class="media-body">
-                                        <div class="float-right">12m</div>
-                                        <div class="media-title">Ujang Maman</div>
-                                        <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla.
-                                            Nulla vel metus scelerisque ante sollicitudin.</span>
-                                    </div>
-                                </li>
-                                <li class="media">
-                                    <img class="rounded-circle mr-3"
-                                        width="50"
-                                        src="{{ asset('img/avatar/avatar-3.png') }}"
-                                        alt="avatar">
-                                    <div class="media-body">
-                                        <div class="float-right">17m</div>
-                                        <div class="media-title">Rizal Fakhri</div>
-                                        <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla.
-                                            Nulla vel metus scelerisque ante sollicitudin.</span>
-                                    </div>
-                                </li>
-                                <li class="media">
-                                    <img class="rounded-circle mr-3"
-                                        width="50"
-                                        src="{{ asset('img/avatar/avatar-4.png') }}"
-                                        alt="avatar">
-                                    <div class="media-body">
-                                        <div class="float-right">21m</div>
-                                        <div class="media-title">Alfa Zulkarnain</div>
-                                        <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla.
-                                            Nulla vel metus scelerisque ante sollicitudin.</span>
-                                    </div>
-                                </li>
-                            </ul>
-                            <div class="pt-1 pb-1 text-center">
-                                <a href="#"
-                                    class="btn btn-primary btn-lg btn-round">
-                                    View All
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </div>    
             </div>
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-lg-6 col-md-12 col-12 col-sm-12">
                     <div class="card">
                         <div class="card-body pt-2 pb-2">
@@ -800,7 +792,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </section>
     </div>
 @endsection

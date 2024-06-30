@@ -45,46 +45,54 @@
                                     <h4>Write Your {{ $pageTitle ?? '' }}</h4>
                                 </div>
                                 <div class="card-body">
-                                    <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" name="name" placeholder="Name" class="form-control {{ ($errors->has('name') ? ' is-invalid' : '') }}" value="{{ $user->name }}"  required>
+                                    <form action="{{ route('users.update', $user->id) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name</label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <input type="text" name="name" placeholder="Name" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ old('name', $user->name) }}" required>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Username</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" name="username" placeholder="Username" class="form-control" value="{{ $user->username }}" required>
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Username</label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <input type="text" name="username" placeholder="Username" class="form-control" value="{{ old('username', $user->username) }}" required>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Email</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" name="email" placeholder="Email" class="form-control" value="{{ $user->email }}" required>
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Email</label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <input type="email" name="email" placeholder="Email" class="form-control" value="{{ old('email', $user->email) }}" required>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Password</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" name="password" placeholder="Password" class="form-control" required>
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Password</label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <input type="password" name="password" placeholder="Password" class="form-control">
+                                                <small class="form-text text-muted">Leave blank if you don't want to change the password.</small>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Roles</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <select class="form-control select2">
-                                                @foreach($missingDataRoleUserForOption as $item)
-                                                    <option value="{{ $item->name }}" {{ $item == $userRole ? 'selected' : '' }}>{{ $item->name }}</option>
-                                                @endforeach
-                                            </select>
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Roles</label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <select class="form-control select2" name="roles" multiple>
+                                                    @foreach($role as $ole)
+                                                        <option value="{{ $ole->name }}">
+                                                            {{ $ole->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row mb-4">
-                                        <div class="col-sm-12 col-md-7">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        <div class="form-group row mb-4">
+                                            <div class="col-sm-12 col-md-7 offset-md-3">
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>

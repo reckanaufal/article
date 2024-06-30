@@ -1,29 +1,57 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="{{ route('login') }}">Rapp</a>
+            <a href="{{ route('login') }}">Kishack</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="{{ route('login') }}">RR</a>
+            <a href="{{ route('login') }}">KH</a>
         </div>
         <ul class="sidebar-menu">
-            <li class="menu-header">Dashboard</li>
-            <li class="nav-item dropdown {{ Request::is('dashboard') ? 'active' : '' }}">
+            {{-- <li class="menu-header">Dashboard</li> --}}
+            <li class="nav-item {{ Request::is('dashboard') ? 'active' : '' }}">
+                <a href="{{ url('dashboard-general-dashboard') }}" class="nav-link"><i class="fas fa-fire"></i><span>Explore Now</span></a>
+            </li>
+            <li class="nav-item dropdown {{ Request::is('users') ? 'active' : '' }}">
                 <a href="#"
-                    class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
+                    class="nav-link has-dropdown"><i class="fa-solid fa-people-group"></i><span>User Management</span></a>
                 <ul class="dropdown-menu">
-                    <li class='{{ Request::is('dashboard-general-dashboard') ? 'active' : '' }}'>
-                        <a class="nav-link"
-                            href="{{ url('dashboard-general-dashboard') }}">General Dashboard</a>
+                    <li class="menu-header">User</li>
+                    @can('user-list')
+                    <li class="{{ Request::is('users') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ url('users') }}"><i class="far fa-square"></i> <span>Users</span></a>
                     </li>
-                    <li class="{{ Request::is('dashboard-ecommerce-dashboard') ? 'active' : '' }}">
-                        <a class="nav-link"
-                            href="{{ url('dashboard-ecommerce-dashboard') }}">Ecommerce Dashboard</a>
-                    </li>
+                    @endcan
+                    @can('permission-list')
+                        <li class="{{ Request::is('permissions') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ url('permissions') }}"><i class="far fa-square"></i> <span>Permission</span></a>
+                        </li>
+                    @endcan
+                    @can('role-list')
+                        <li class="{{ Request::is('roles') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ url('roles') }}"><i class="far fa-square"></i> <span>Roles</span></a>
+                        </li>
+                    @endcan
                 </ul>
             </li>
-            <li class="menu-header">Administrator</li>
-                @can('role-list')
+            <li class="nav-item dropdown {{ Request::is('category') ? 'active' : '' }}">
+                <a href="#"
+                    class="nav-link has-dropdown"><i class="fa-solid fa-book-open"></i><span>Master Data</span></a>
+                <ul class="dropdown-menu">
+                    <li class="menu-header">Master</li>
+                    @can('category-list')
+                    <li class="{{ Request::is('category') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ url('category') }}"><i class="far fa-square"></i> <span>Master Category</span></a>
+                    </li>
+                    @endcan
+                    @can('article-list')
+                        <li class="{{ Request::is('story') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ url('story') }}"><i class="far fa-square"></i> <span>Master Article</span></a>
+                        </li>
+                    @endcan
+                </ul>
+            </li>
+            <!-- <li class="menu-header">Administrator</li> -->
+                <!-- @can('role-list')
                     <li class="{{ Request::is('roles') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('roles') }}"><i class="far fa-square"></i> <span>Roles</span></a>
                     </li>
@@ -32,7 +60,7 @@
                 <li class="{{ Request::is('users') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ url('users') }}"><i class="far fa-square"></i> <span>Users</span></a>
                 </li>
-                @endcan
+                @endcan -->
             {{-- <li class="menu-header">Starter</li>
             <li class="nav-item dropdown {{ Request::is('dashboard') ? 'active' : '' }}">
                 <a href="#"

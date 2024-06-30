@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Login &mdash; Rapp</title>
+    <title>Login &mdash; Kishack</title>
 
     <link rel="icon" href="{{ asset('img/logo/rapp-mini-logo.png') }}">
     <!-- General CSS Files -->

@@ -15,8 +15,8 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-button">
-                @can('role-create')
-                    <a href="{{ route('roles.create') }}" class="btn btn-primary">Add New</a>
+                @can('article-create')
+                    <a href="{{ route('story.create') }}" class="btn btn-primary">Add New</a>
                 @endcan
             </div>
             <div class="section-header-breadcrumb">
@@ -85,45 +85,47 @@
                             <div class="table-responsive">
                                 <div id="table-wrapper">
                                     <div id="table-scroll">
-                                        @can('role-list')
-                                            <table class="table-striped table" id="table-roles">
+                                        @can('article-list')
+                                            <table class="table-striped table" id="table-story">
                                                 <thead>
                                                     <tr>
                                                         <th>No</th>
-                                                        <th>Name</th>
+                                                        <th>Title Article</th>
+                                                        <th>Category</th>
                                                         <th>Created At</th>
                                                         <th class="text-center" width="1%">#</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($roles as $item)
+                                                    @foreach ($story as $item)
                                                         <tr>
                                                             <td class="text-center">
                                                                 {{ $loop->iteration }}.
                                                             </td>
-                                                            <td>{{ $item->name }}
+                                                            <td>{{ $item->title }}
                                                                 <div class="table-links">
-                                                                    <a href="{{ route('roles.show', $item->id) }}">View</a>
+                                                                    <a href="{{ route('story.show', $item->id) }}">View</a>
                                                                     <div class="bullet"></div>
-                                                                    <a href="{{ route('roles.edit', $item->id) }}">Edit</a>
+                                                                    <a href="{{ route('story.edit', $item->id) }}">Edit</a>
                                                                     <div class="bullet"></div>
-                                                                    <a href="{{ route('roles.destroy', $item->id) }}" class="text-danger">Trash</a>
+                                                                    <a href="{{ route('story.destroy', $item->id) }}" class="text-danger">Trash</a>
                                                                 </div>
                                                             </td>
+                                                            <td>{{ $item->category ? $item->category->name : 'No Category' }}</td>
                                                             <td>{{ $item->created_at }}</td>
                                                             <td>
-                                                                <form id="myForm-{{ $item->id }}" action="{{ route('roles.destroy', $item->id ?? '') }}" method="POST" class="d-flex">
-                                                                    @can('role-show')
-                                                                        <a class="btn btn-primary mr-1" href="{{ route('roles.show',$item->id) }}" data-toggle="tooltip" title="Show">
+                                                                <form id="myForm-{{ $item->id }}" action="{{ route('story.destroy', $item->id ?? '') }}" method="POST" class="d-flex">
+                                                                    @can('article-show')
+                                                                        <a class="btn btn-primary mr-1" href="{{ route('story.show',$item->id) }}" data-toggle="tooltip" title="Show">
                                                                             <i class="fa fa-fw fa-eye p-0"></i>
                                                                         </a>
                                                                     @endcan
-                                                                    @can('role-edit')
-                                                                        <a class="btn btn-success btn-action mr-1" href="{{ route('roles.edit',$item->id) }}" data-toggle="tooltip" title="Edit">
+                                                                    @can('article-edit')
+                                                                        <a class="btn btn-success btn-action mr-1" href="{{ route('story.edit',$item->id) }}" data-toggle="tooltip" title="Edit">
                                                                             <i class="fa fa-pencil-alt p-0"></i>
                                                                         </a>
                                                                     @endcan
-                                                                    @can('role-delete')
+                                                                    @can('article-delete')
                                                                         @csrf
                                                                         @method('DELETE')
                                                                         <button type="submit" class="btn btn-danger btn-action" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="confirmDelete({{ $item->id }})">

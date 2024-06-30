@@ -16,9 +16,11 @@ use Illuminate\Support\Facades\Route;
 // Route::redirect('/', '/dashboard-general-dashboard');
 
 // Dashboard
-Route::get('/dashboard-general-dashboard', function () {
-    return view('pages.dashboard-general-dashboard', ['type_menu' => 'dashboard']);
-});
+Route::get('/dashboard-general-dashboard', 'LoginController@dashboard')->name('dashboard-general-dashboard');
+
+// Route::get('/dashboard-general-dashboard', function () {
+//     return view('pages.dashboard-general-dashboard', ['type_menu' => 'dashboard']);
+// });
 Route::get('/dashboard-ecommerce-dashboard', function () {
     return view('pages.dashboard-ecommerce-dashboard', ['type_menu' => 'dashboard']);
 });
@@ -49,6 +51,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', 'LoginController@dashboard')->name('dashboard');
     //roles
     Route::resource('roles', 'RoleController');
+    Route::resource('permissions', 'PermissionController');
+    Route::resource('category', 'CategoryController');
+    Route::resource('story', 'StoryController');
     //user
     Route::resource('users', 'UserController');
     Route::get('/profile', 'UserController@profile')->name('profile');

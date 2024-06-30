@@ -24,7 +24,9 @@
             <div class="section-header">
                 <h1>{{ $pageTitle }}</h1>
                 <div class="section-header-button">
-                    <a href="{{ route('users.create') }}" class="btn btn-primary">Add New</a>
+                    @can('user-create')
+                        <a href="{{ route('users.create') }}" class="btn btn-primary">Add New</a>
+                    @endcan
                 </div>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
@@ -142,7 +144,9 @@
                                                     @endforeach
                                                 </tbody>
                                             </table> --}}
-                                            <table class="table-striped table" id="table-users"></table>
+                                            @can('user-list')
+                                                <table class="table-striped table" id="table-users"></table>
+                                            @endcan
                                         </div>
                                     </div>
                                 </div>
@@ -183,7 +187,7 @@
 @endsection
 @push('scripts')
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             $("#table-users").dataTable({
                 processing: true,
                 serverSide: true,
@@ -197,32 +201,40 @@
                         width: '0.1%',
                         orderable: false,
                         searchable: false,
-                        render: function (data, type, row, meta) {
-                            return meta.row+meta.settings._iDisplayStart+1;
+                        render: function(data, type, row, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
                         }
                     },
                     {
                         title: 'Name',
                         data: 'name',
                         width: '1%',
-                        render: function(r, x, i) {
-                            return String(i.name);
+                        render: function(data, type, row) {
+                            return row.name;
                         }
                     },
                     {
                         title: 'Username',
                         data: 'username',
                         width: '1%',
-                        render: function(r, x, i) {
-                            return String(i.username);
+                        render: function(data, type, row) {
+                            return row.username;
                         }
                     },
                     {
                         title: 'Email',
                         data: 'email',
                         width: '1%',
-                        render: function(r, x, i) {
-                            return String(i.email);
+                        render: function(data, type, row) {
+                            return row.email;
+                        }
+                    },
+                    {
+                        title: 'Roles',
+                        data: 'role_names',
+                        width: '1%',
+                        render: function(data, type, row) {
+                            return row.role_names.join(', ');
                         }
                     },
                     {
@@ -230,16 +242,16 @@
                         class: 'text-center',
                         width: '0.1%',
                         data: 'id',
-                        render: function(id, x, i) {
+                        render: function(id, type, row) {
                             return `
-                                <form id="myForm-${id}" action="{{ route('users.index') }}/${id}/destroy" method="POST" class="d-flex">
+                                <form id="myForm-${id}" action="{{ url('users') }}/${id}" method="POST" class="d-flex">
                                     @can('user-show')
-                                        <a id="modal-user-show" data-user="${i.name}'-'${i.username}'-'${i.email}" class="btn btn-primary mr-1" href="{{ route('users.index') }}/${id}" title="Show">
+                                        <a id="modal-user-show" data-user="${row.name}-${row.username}-${row.email}" class="btn btn-primary mr-1" href="{{ url('users') }}/${id}" title="Show">
                                             <i class="fa fa-fw fa-eye p-0"></i>
                                         </a>
                                     @endcan
                                     @can('user-edit')
-                                        <a class="btn btn-success btn-action mr-1" href="{{ route('users.index') }}/${id}/edit" data-toggle="tooltip" title="Edit">
+                                        <a class="btn btn-success btn-action mr-1" href="{{ url('users') }}/${id}/edit" data-toggle="tooltip" title="Edit">
                                             <i class="fa fa-pencil-alt p-0"></i>
                                         </a>
                                     @endcan
@@ -253,13 +265,15 @@
                                 </form>
                             `;
                         }
-                    },
+                    }
                 ],
-                order: [[ 1, "ASC" ]],
+                order: [[1, "ASC"]],
                 columnDefs: [
-                    { "sortable": false, "targets": [4] }
+                    { "sortable": false, "targets": [5] }
                 ]
             });
+
+
             // var table = $('#table-users').dataTable({
             //         processing: true,
             //         serverSide: true,

@@ -40,7 +40,7 @@
                                     <div class="col-md-6 text-md-right">
                                         <address>
                                             <strong>Shipped To:</strong><br>
-                                            Muhamad Recki Naufal Legowo<br>
+                                            Muhamad Recka Naufal Legowo<br>
                                             1234 Main<br>
                                             Apt. 4B<br>
                                             Bogor Barat, Indonesia

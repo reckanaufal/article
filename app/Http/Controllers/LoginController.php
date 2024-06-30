@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Story;
 use Spatie\Permission\Models\Role;
 use DB;
 class LoginController extends Controller
@@ -21,6 +22,8 @@ class LoginController extends Controller
 
         return view('login.login', compact('pageTitle', 'pageDescription'));
     }
+
+    
 
     public function login(Request $request)
     {
@@ -49,11 +52,14 @@ class LoginController extends Controller
     {
         $userCount = User::count();
         $roleCount = Role::count();
+        $story = Story::all();
+        // dd($story);
 
         $pageTitle = 'Dashboard';
         $type_menu = 'dashboard';
-        return view('pages.dashboard-general-dashboard', compact('userCount', 'roleCount', 'pageTitle', 'type_menu'));
+        return view('pages.dashboard-general-dashboard', compact('story', 'userCount', 'roleCount', 'pageTitle', 'type_menu'));
     }
+
     public function viewForgetPassword(){
         $pageTitle = 'Forget Password';
         return view('pages.auth-forgot-password', compact('pageTitle'));

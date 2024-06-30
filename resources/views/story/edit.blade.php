@@ -19,7 +19,7 @@
         <section class="section">
             <div class="section-header">
                 <div class="section-header-back">
-                    <a href="{{ route('users.index') }}"
+                    <a href="/story"
                         class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
                 </div>
                 <h1>Create New {{ $pageTitle ?? '' }}</h1>
@@ -35,7 +35,8 @@
                 <p class="section-lead">
                     On this page you can create a new {{ $pageTitle ?? '' }} and fill in all fields.
                 </p>
-                <form method="POST" action="{{ route('users.store') }}"  role="form" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('story.update', $story->id) }}"  role="form" enctype="multipart/form-data">
+                    @method('PUT') 
                     @csrf
                     <div class="row">
                         <div class="col-12">
@@ -44,47 +45,35 @@
                                     <h4>Write Your {{ $pageTitle ?? '' }}</h4>
                                 </div>
                                 <div class="card-body">
-                                    @if ($errors->any())
-                                        <div class="alert alert-danger">
-                                            <ul>
-                                                @foreach ($errors->all() as $error)
-                                                    <li>{{ $error }}</li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    @endif
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" name="name" placeholder="Name" class="form-control" required>
+                                        <div class="col-sm-12 col-md-7 offset-md-3">
+                                            <div class="upload-box" style="border: 2px dashed #ccc; padding: 20px; text-align: center; cursor: pointer;">
+                                                <span>Upload banner image 1400px x 1400px</span>
+                                                <input type="file" name="banner_image" style="opacity: 0; position: absolute; left: 0; top: 0; width: 100%; height: 100%; cursor: pointer;">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Email</label>
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Category</label>
                                         <div class="col-sm-12 col-md-7">
-                                            <input type="email" name="email" placeholder="Email" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Username</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" name="username" placeholder="Username" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Password</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" name="password" placeholder="Password" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Roles</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <select class="form-control select2" name="roles">
-                                                @foreach ($role as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            <select class="custom-select" name="category" id="inputGroupSelect01">
+                                                <option selected>Choose...</option>
+                                                @foreach ($category as $item)
+                                                    <option value="{{$item->id}}">{{$item->name}}</option>
                                                 @endforeach
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title Article</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text" name="title" placeholder="Input your title" class="form-control {{ ($errors->has('title') ? ' is-invalid' : '') }}" value="{{ $story->title }}" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Content</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <textarea name="content" rows="10" style="min-height: 200px;" placeholder="Input your description" class="form-control {{ $errors->has('content') ? ' is-invalid' : '' }}" required>{{ old('content', $story->content) }}</textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">

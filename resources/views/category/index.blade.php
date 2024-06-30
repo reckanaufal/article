@@ -15,8 +15,8 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-button">
-                @can('role-create')
-                    <a href="{{ route('roles.create') }}" class="btn btn-primary">Add New</a>
+                @can('category-create')
+                    <a href="{{ route('category.create') }}" class="btn btn-primary">Add New</a>
                 @endcan
             </div>
             <div class="section-header-breadcrumb">
@@ -81,65 +81,64 @@
                             </div>
 
                             <div class="clearfix mb-3"></div>
-
                             <div class="table-responsive">
                                 <div id="table-wrapper">
-                                    <div id="table-scroll">
-                                        @can('role-list')
-                                            <table class="table-striped table" id="table-roles">
-                                                <thead>
-                                                    <tr>
-                                                        <th>No</th>
-                                                        <th>Name</th>
-                                                        <th>Created At</th>
-                                                        <th class="text-center" width="1%">#</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($roles as $item)
+                                    <div id="table-scroll"> 
+                                            @can('category-list')
+                                                <table class="table-striped table" id="table-category">
+                                                    <thead>
                                                         <tr>
-                                                            <td class="text-center">
-                                                                {{ $loop->iteration }}.
-                                                            </td>
-                                                            <td>{{ $item->name }}
-                                                                <div class="table-links">
-                                                                    <a href="{{ route('roles.show', $item->id) }}">View</a>
-                                                                    <div class="bullet"></div>
-                                                                    <a href="{{ route('roles.edit', $item->id) }}">Edit</a>
-                                                                    <div class="bullet"></div>
-                                                                    <a href="{{ route('roles.destroy', $item->id) }}" class="text-danger">Trash</a>
-                                                                </div>
-                                                            </td>
-                                                            <td>{{ $item->created_at }}</td>
-                                                            <td>
-                                                                <form id="myForm-{{ $item->id }}" action="{{ route('roles.destroy', $item->id ?? '') }}" method="POST" class="d-flex">
-                                                                    @can('role-show')
-                                                                        <a class="btn btn-primary mr-1" href="{{ route('roles.show',$item->id) }}" data-toggle="tooltip" title="Show">
-                                                                            <i class="fa fa-fw fa-eye p-0"></i>
-                                                                        </a>
-                                                                    @endcan
-                                                                    @can('role-edit')
-                                                                        <a class="btn btn-success btn-action mr-1" href="{{ route('roles.edit',$item->id) }}" data-toggle="tooltip" title="Edit">
-                                                                            <i class="fa fa-pencil-alt p-0"></i>
-                                                                        </a>
-                                                                    @endcan
-                                                                    @can('role-delete')
-                                                                        @csrf
-                                                                        @method('DELETE')
-                                                                        <button type="submit" class="btn btn-danger btn-action" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="confirmDelete({{ $item->id }})">
-                                                                            <i class="fa fa-trash-alt p-0"></i>
-                                                                        </button>
-                                                                    @endcan
-                                                                </form>
-                                                            </td>
+                                                            <th>No</th>
+                                                            <th>Name</th>
+                                                            <th>Created At</th>
+                                                            <th class="text-center" width="1%">#</th>
                                                         </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        @endcan
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($category as $item)
+                                                            <tr>
+                                                                <td class="text-center">
+                                                                    {{ $loop->iteration }}.
+                                                                </td>
+                                                                <td>{{ $item->name }}
+                                                                    <div class="table-links">
+                                                                        <a href="{{ route('category.show', $item->id) }}">View</a>
+                                                                        <div class="bullet"></div>
+                                                                        <a href="{{ route('category.edit', $item->id) }}">Edit</a>
+                                                                        <div class="bullet"></div>
+                                                                        <a href="{{ route('category.destroy', $item->id) }}" class="text-danger">Trash</a>
+                                                                    </div>
+                                                                </td>
+                                                                <td>{{ $item->created_at }}</td>
+                                                                <td>
+                                                                    <form id="myForm-{{ $item->id }}" action="{{ route('category.destroy', $item->id ?? '') }}" method="POST" class="d-flex">
+                                                                        @can('category-show')
+                                                                            <a class="btn btn-primary mr-1" href="{{ route('category.show',$item->id) }}" data-toggle="tooltip" title="Show">
+                                                                                <i class="fa fa-fw fa-eye p-0"></i>
+                                                                            </a>
+                                                                        @endcan
+                                                                        @can('category-edit')
+                                                                            <a class="btn btn-success btn-action mr-1" href="{{ route('category.edit',$item->id) }}" data-toggle="tooltip" title="Edit">
+                                                                                <i class="fa fa-pencil-alt p-0"></i>
+                                                                            </a>
+                                                                        @endcan
+                                                                        @can('category-delete')
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                            <button type="submit" class="btn btn-danger btn-action" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="confirmDelete({{ $item->id }})">
+                                                                                <i class="fa fa-trash-alt p-0"></i>
+                                                                            </button>
+                                                                        @endcan
+                                                                    </form>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            @endcan
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             {{-- <div class="float-right">
                                 <nav>
                                     <ul class="pagination">
